@@ -1,0 +1,102 @@
+
+<br>
+<br>
+
+<div class="row">
+  <div class="col-sm-4">
+    <div class="tile-title tile-primary">
+      <div class="icon">
+        <fa-icon class="tile-icon" [icon]="faDice"></fa-icon>
+      </div>
+      <div class="title">
+        <div *ngIf="rollDice; else rollDiceElse">{{ rollDice }}</div>
+        <ng-template #rollDiceElse>0</ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="tile-title tile-primary">
+      <div class="icon">
+        <fa-icon class="tile-icon" [icon]="faMapMarkerAlt"></fa-icon>
+      </div>
+      <div class="title">
+        <div *ngIf="currentCell; else currentCellElse">{{ currentCell.name }}</div>
+        <ng-template #currentCellElse>Start</ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="tile-title tile-primary">
+      <div class="icon">
+        <fa-icon class="tile-icon" [icon]="faCloud"></fa-icon>
+      </div>
+      <div class="title">
+        <div>{{ decisionStatus}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="col-sm-8 offset-2">
+    <div style="min-height: 300px;" class="tile-title tile-primary">
+      <div class="icon">
+        <fa-icon class="tile-icon" [icon]="faMapMarkerAlt"></fa-icon>
+      </div>
+      <div class="title">
+        <div *ngIf="currentCell; else currentCellElse">{{ currentCell.name }}</div>
+        <ng-template #currentCellElse>Start</ng-template>
+        <div class="text-center">Test common message.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 text-center">
+    <button (click)="onPlayTurn()" class="btn btn-warning btn-circle btn-xl">
+      <fa-icon style="color: white; font-size: 34px;" [icon]="faArrowRight"></fa-icon>
+    </button>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div *ngFor="let contract of ownedTerrains" class="col-3 pb-3">
+    <div class="card contract-card">
+      <div class="contracts-header" [ngStyle]="{'background-color': contract.color}">
+
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ contract.name }}</h5>
+        <p class="card-text text-dark">Numero di case: </p>
+        <button class="btn btn-danger" (click)="onRemoveContract(ownedTerrains.indexOf(contract))">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="terminal">
+      <div style="padding: 8px;">
+        <p *ngIf="rollDice">Tiro i dadi, esce: {{ rollDice }} !</p >
+        <p *ngIf="currentCell">Adesso mi trovo su {{ currentCell.name }} !</p>
+        <p>Numero di giri: {{ revCounter }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
